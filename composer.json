@@ -13,12 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Smalot\\Flex\\": "src/"
+            "Hubside\\Flex\\": "src/"
         }
     },
     "extra": {
         "class": [
-            "Smalot\\Flex\\Local"
+            "Hubside\\Flex\\LocalInstallerPlugin"
         ]
     }
 }
