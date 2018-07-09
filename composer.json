@@ -1,0 +1,24 @@
+{
+    "name": "hubside/flex-local",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "require": {
+        "php": "^7.1.3",
+        "composer-plugin-api": "^1.1",
+        "symfony/flex": "^1.0"
+    },
+    "require-dev": {
+        "composer/composer": "*",
+        "symfony/console": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Smalot\\Flex\\": "src/"
+        }
+    },
+    "extra": {
+        "class": [
+            "Smalot\\Flex\\Local"
+        ]
+    }
+}
