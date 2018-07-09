@@ -17,12 +17,14 @@
         "composer/composer": "*",
         "symfony/console": "*"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Hubside\\Flex\\": "src/"
+            "Hubside\\Composer\\Flex\\": "src/"
         }
     },
     "extra": {
-        "class": "Hubside\\Flex\\LocalInstallerPlugin"
+        "class": "Hubside\\Composer\\Flex\\LocalInstallerPlugin"
     }
 }
