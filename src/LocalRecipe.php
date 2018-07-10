@@ -14,8 +14,6 @@ class LocalRecipe implements PluginInterface
     {
         $io->write(__METHOD__.PHP_EOL);
 
-        $composer->setre
-
         //$installer = new TemplateInstaller($io, $composer);
         //$composer->getInstallationManager()->addInstaller($installer);
     }
