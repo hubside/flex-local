@@ -12,6 +12,10 @@ class LocalRecipe implements PluginInterface
 {
     public function activate(Composer $composer, IOInterface $io)
     {
+        $io->write(__METHOD__.PHP_EOL);
+
+        $composer->setre
+
         //$installer = new TemplateInstaller($io, $composer);
         //$composer->getInstallationManager()->addInstaller($installer);
     }
@@ -33,6 +37,9 @@ class LocalRecipe implements PluginInterface
      */
     public function processPackages(Event $event)
     {
+        var_dump($event);
+        return;
+
         $composer = $event->getComposer();
         $installationManager = $composer->getInstallationManager();
         $repositoryManager = $composer->getRepositoryManager();
