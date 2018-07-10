@@ -25,6 +25,6 @@
         }
     },
     "extra": {
-        "class": "Hubside\\Composer\\Flex\\LocalInstallerPlugin"
+        "class": "Hubside\\Composer\\Flex\\LocalRecipe"
     }
 }

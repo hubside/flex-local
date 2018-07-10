@@ -8,7 +8,7 @@ use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 
-class LocalInstallerPlugin implements PluginInterface
+class LocalRecipe implements PluginInterface
 {
     public function activate(Composer $composer, IOInterface $io)
     {
