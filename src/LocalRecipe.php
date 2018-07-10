@@ -3,45 +3,64 @@
 namespace Hubside\Composer\Flex;
 
 use Composer\Composer;
+use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\Installer\PackageEvent;
+use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 
-class LocalRecipe implements PluginInterface
+/**
+ * Class LocalRecipe
+ * @package Hubside\Composer\Flex
+ */
+class LocalRecipe implements PluginInterface, EventSubscriberInterface
 {
+    /**
+     * @var bool
+     */
+    protected static $activated = false;
+
+    /**
+     * @param Composer $composer
+     * @param IOInterface $io
+     */
     public function activate(Composer $composer, IOInterface $io)
     {
-        $io->write(__METHOD__.PHP_EOL);
+        self::$activated = true;
 
-        //$installer = new TemplateInstaller($io, $composer);
-        //$composer->getInstallationManager()->addInstaller($installer);
+        $io->write(__METHOD__.PHP_EOL);
     }
 
     /**
-     * Returns an array of event names this subscriber wants to listen to.
+     * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
+        if (!self::$activated) {
+            return [];
+        }
+
         return [
-            ScriptEvents::POST_INSTALL_CMD => "processPackages",
-            ScriptEvents::POST_UPDATE_CMD => "processPackages",
+            //InstallerEvents::PRE_DEPENDENCIES_SOLVING => [['populateProvidersCacheDir', PHP_INT_MAX]],
+            //InstallerEvents::POST_DEPENDENCIES_SOLVING => [['populateFilesCacheDir', PHP_INT_MAX]],
+            //PackageEvents::PRE_PACKAGE_INSTALL => [['populateFilesCacheDir', ~PHP_INT_MAX]],
+            //PackageEvents::PRE_PACKAGE_UPDATE => [['populateFilesCacheDir', ~PHP_INT_MAX]],
+            PackageEvents::POST_PACKAGE_INSTALL => 'record',
+            //PackageEvents::POST_PACKAGE_UPDATE => [['record'], ['enableThanksReminder']],
+            PackageEvents::POST_PACKAGE_UNINSTALL => 'record',
+            //ScriptEvents::POST_CREATE_PROJECT_CMD => 'configureProject',
+            //ScriptEvents::POST_INSTALL_CMD => 'install',
+            //ScriptEvents::POST_UPDATE_CMD => 'update',
+            //PluginEvents::PRE_FILE_DOWNLOAD => 'onFileDownload',
+            //'auto-scripts' => 'executeAutoScripts',
         ];
     }
 
-    /**
-     * @param Event $event
-     * @throws \Exception
-     */
-    public function processPackages(Event $event)
+    public function record(PackageEvent $event)
     {
-        var_dump($event);
-        return;
-
-        $composer = $event->getComposer();
-        $installationManager = $composer->getInstallationManager();
-        $repositoryManager = $composer->getRepositoryManager();
-        $localRepository = $repositoryManager->getLocalRepository();
+        var_dump($event->getName());
     }
 }
 
